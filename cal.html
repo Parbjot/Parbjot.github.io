@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="calculator.js" defer></script>
+    <title>Calculator</title>
+</head>
+<body>
+    <h1>Scientific Calculator</h1>
+    <label>Math:</label>
+    <input id="outputhere" placeholder="input here" type="text"/>
+    <br><br>
+    <button id="addition" onclick="button('addition', 'outputhere')">+</button>
+    <button id="subtractor" onclick="button('subtractor', 'outputhere')">-</button>
+    <button id="multiply" onclick="button('multiply', 'outputhere')">*</button>
+    <button id="divide" onclick="button('divide', 'outputhere')">/</button>
+    <button id="open-parenthesis" onclick="button('open-parenthesis', 'outputhere')">(</button>
+    <button id="close-parenthesis" onclick="button('close-parenthesis', 'outputhere')">)</button>
+    <br><br>
+    <button id="zero" onclick="button('zero', 'outputhere')">0</button>
+    <button id="one" onclick="button('one', 'outputhere')">1</button>
+    <button id="two" onclick="button('two', 'outputhere')">2</button>
+    <button id="three" onclick="button('three', 'outputhere')">3</button>
+    <button id="four" onclick="button('four', 'outputhere')">4</button>
+    <button id="five" onclick="button('five', 'outputhere')">5</button>
+    <br><br>
+    <button id="six" onclick="button('six', 'outputhere')">6</button>
+    <button id="seven" onclick="button('seven', 'outputhere')">7</button>
+    <button id="eight" onclick="button('eight', 'outputhere')">8</button>
+    <button id="nine" onclick="button('nine', 'outputhere')">9</button>
+    <button id="decimal" onclick="button('decimal', 'outputhere')">.</button>
+    <br><br>
+    <button id="delete" onclick="button_action('delete', 'outputhere')"  >delete</button>
+    <button id="clear" onclick="button_action('clear', 'outputhere')">clear</button>
+    <button id="equals" onclick="button_action('equals', 'outputhere')">=</button>
+    <br><br>
+    <p id="show_exp"></p>
+    <p id="show_ans"></p>
+    <br>
+    <a href="index.html">Go back to home page</a>
+</body>
+</html>
