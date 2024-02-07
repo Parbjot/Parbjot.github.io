@@ -90,5 +90,6 @@ async function fetchWeather(city) {
                 option.value = city;
                 option.text = city;
                 citySelector.add(option);
+                        
             });
         });
