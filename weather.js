@@ -1,6 +1,6 @@
 async function fetchWeather(city) {
             try {
-                const response = await fetch(`http://api.weatherapi.com/v1/current.json?key=25d6f610ec714dedb9903659240202&q=${city}&aqi=no`);
+                const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=25d6f610ec714dedb9903659240202&q=${city}&aqi=no`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -32,7 +32,7 @@ async function fetchWeather(city) {
 
         async function fetchForecast(city) {
             try {
-                const response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=25d6f610ec714dedb9903659240202&q=${city}&days=7&aqi=no`);
+                const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=25d6f610ec714dedb9903659240202&q=${city}&days=7&aqi=no`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
