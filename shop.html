@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fliphaul</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .logo {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .logo img {
+            width: 200px; /* Set width as desired */
+            height: auto; /* Maintain aspect ratio */
+        }
+
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .product {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            background-color: #fff;
+            width: 250px;
+        }
+
+        .product h3 {
+            margin-top: 0;
+        }
+
+        .product img {
+            width: 100%;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            height: 150px; /* Set the maximum height of the image */
+            object-fit: cover;
+        }
+
+        .product p {
+            margin: 5px 0;
+        }
+
+        .add-to-cart {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            padding: 8px 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        .add-to-cart:hover {
+            background-color: #0056b3;
+        }
+
+        .remove-from-cart {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            padding: 8px 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        .remove-from-cart:hover {
+            background-color: #c82333;
+        }
+
+        #cartDetails {
+            display: none;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        #cartDetails table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        #cartDetails table th,
+        #cartDetails table td {
+            border-bottom: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        #cartDetails table th {
+            background-color: #f2f2f2;
+        }
+
+        #cartDetails p {
+            margin-top: 10px;
+        }
+
+        #showHideCart,
+        #submit {
+            margin-top: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        #showHideCart {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        #submit {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        #showHideCart:hover,
+        #submit:hover {
+            opacity: 0.8;
+        }
+    </style>
+
+    <script>
+        let cartItems = [];
+
+        function addToCart(productName, price) {
+            cartItems.push({ name: productName, price: price });
+            displayCart();
+        }
+
+        function removeFromCart(productName) {
+            cartItems = cartItems.filter(item => item.name !== productName);
+            displayCart();
+        }
+
+        function displayCart() {
+            const cartElement = document.querySelector('#cart');
+            const cartCountElement = document.querySelector('#cartCount');
+            const totalPriceElement = document.getElementById('totalPrice');
+
+            cartElement.innerHTML = '';
+            let totalPrice = 0;
+            let productCount = {};
+
+            cartItems.forEach(item => {
+                if (productCount[item.name]) {
+                    productCount[item.name]++;
+                } else {
+                    productCount[item.name] = 1;
+                }
+                totalPrice += item.price;
+            });
+
+            cartCountElement.textContent = cartItems.length;
+
+            const cartTable = document.createElement('table');
+            cartTable.innerHTML = `
+                <tr>
+                    <th>Product</th>
+                    <th>Amount</th>
+                    <th>Unit Price</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+            `;
+
+            for (let productName in productCount) {
+                const amount = productCount[productName];
+                const unitPrice = cartItems.find(item => item.name === productName).price;
+                const totalProductPrice = unitPrice * amount;
+
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${productName}</td>
+                    <td>${amount}</td>
+                    <td>$${unitPrice}</td>
+                    <td>$${totalProductPrice}</td>
+                    <td><button class="remove-from-cart" onclick="removeFromCart('${productName}')">Remove</button></td>
+                `;
+                cartTable.appendChild(tr);
+            }
+
+            cartElement.appendChild(cartTable);
+            totalPriceElement.textContent = `Total Price: $${totalPrice}`;
+        }
+
+        async function submitOrder() {
+            const databaseUrl = 'https://ecommerce-2139d-default-rtdb.firebaseio.com/orders.json'; // Replace with your Firebase Realtime Database URL
+
+            const timestamp = new Date().toLocaleString();
+
+            const orderData = {
+                timestamp: timestamp,
+                items: {}
+            };
+
+            cartItems.forEach(item => {
+                if (orderData.items[item.name]) {
+                    orderData.items[item.name].amount++;
+                } else {
+                    orderData.items[item.name] = {
+                        price: item.price,
+                        amount: 1
+                    };
+                }
+            });
+
+            try {
+                const response = await fetch(databaseUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(orderData)
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to send message');
+                }
+
+                cartItems = [];
+                displayCart();
+                alert('Order submitted successfully!');
+            } catch (error) {
+                console.error('Error submitting order:', error);
+                alert('Failed to submit order. Please try again later.');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const cartDetails = document.querySelector('#cartDetails');
+            cartDetails.style.display = 'none';
+
+            document.querySelector('#showHideCart').addEventListener('click', function() {
+                cartDetails.style.display = cartDetails.style.display === 'none' ? 'block' : 'none';
+            });
+
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const productName = button.getAttribute('data-product');
+                    const productPrice = parseFloat(button.getAttribute('data-price'));
+                    addToCart(productName, productPrice);
+                });
+            });
+
+            document.querySelector('#submit').addEventListener('click', submitOrder);
+        });
+    </script>
+</head>
+<body>
+    <div class="logo">
+        <img src="fliphauk.jpg" alt="Fliphaul">
+    </div>
+
+    <h2>Mobile Store</h2>
+
+    <div class="products">
+        <div class="product" id="samsungs24ultra">
+            <h3>Samsung S24 Ultra</h3>
+            <img src="samsung24ultra.jpg" alt="Samsung S24 Ultra">
+            <p>Description: Samsung S24 Ultra 1Tb Titanium blue.</p>
+            <p>Price: $2051.99</p>
+            <button class="add-to-cart" data-product="Samsung S24 Ultra" data-price="2051.99">Add to Cart</button>
+        </div>
+        <div class="product" id="samsungs24plus">
+            <h3>Samsung S24+</h3>
+            <img src="samsungs24+.jpg" alt="Samsung S24+">
+            <p>Description: Samsung S24+ 512Gb Jade green.</p>
+            <p>Price: $1403.99</p>
+            <button class="add-to-cart" data-product="Samsung S24+" data-price="1403.99">Add to Cart</button>
+        </div>
+        <div class="product" id="samsungs24">
+            <h3>Samsung S24</h3>
+            <img src="samsungs4.jpg" alt="Samsung S24">
+            <p>Description: Samsung S24 256Gb Sapphire blue.</p>
+            <p>Price: $1061.99</p>
+            <button class="add-to-cart" data-product="Samsung S24" data-price="1061.99">Add to Cart</button>
+        </div>
+    </div>
+
+    <h2>Shopping Cart (<span id="cartCount">0</span>)</h2>
+    <div id="cartDetails">
+        <div id="cart"></div>
+        <p id="totalPrice">Total Price: $0</p>
+    </div>
+
+    <button id="showHideCart">Show/Hide Cart Details</button>
+    <button id="submit">Submit Order</button>
+</body>
+</html>
