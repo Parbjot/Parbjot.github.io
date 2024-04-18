@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Signup</title>
+    <link rel="stylesheet" href="signup.css"> <!-- Link to the CSS file -->
+</head>
+<body>
+    <div class="container">
+        <!-- Spotify logo -->
+        <img src="Spotifylogo.png" alt="Spotify Logo" style="width: 100px; height: auto;">
+
+        <h1 style="color: white; background-color: black; padding: 15px; border-radius: 5px;">Sign up to start listening</h1>
+        <form id="signup-form">
+            <h5 style="color: aliceblue;"> Email Address</h5>
+            <input type="email" id="email" placeholder="name@domain.com" required>
+            <h5 style="color: aliceblue;"> Password</h5>
+            <input type="password" id="password" placeholder="*********" required> <!-- Add password input field -->
+            <br><br>
+            <button type="submit">Sign Up</button>
+        </form>
+        <p id="message" style="color: white;"></p> <!-- Message element for displaying signup message -->
+        <p style="color: white;">Already have an account? <a href="https://accounts.spotify.com/en/login?continue=https%3A%2F%2Fopen.spotify.com%2F" style="color: white;">Log in here.</a></p>
+        <p style="color: white;">This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" style="color: white;">Privacy Policy</a> and <a href="https://policies.google.com/privacy" style="color: white;">Terms of Service</a> apply.</p>
+        <p style="color: rgb(70, 221, 33);">Click <a href="index1.html" style="color: rgb(70, 221, 33);">here</a> to go to the <main></main> page.</p>
+    </div>
+
+    <script>
+        document.getElementById('signup-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Get form values
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+
+            // Check if email and password are not empty
+            if (email && password) {
+                // Show success message in a popup dialog box
+                alert('Signed up successfully!');
+            } else {
+                // Show error message if either email or password is empty
+                var messageElement = document.getElementById('message');
+                messageElement.textContent = 'Please enter both email and password.';
+            }
+        });
+    </script>
+</body>
+</html>

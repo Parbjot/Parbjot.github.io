@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Clone</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="Spotify_favicon.png" type="image/x-icon">
+    <script>
+        function playAudio(audioId) {
+            var audio = document.getElementById(audioId);
+            var allAudio = document.getElementsByTagName('audio');
+
+            for (var i = 0; i < allAudio.length; i++) {
+                if (allAudio[i].id !== audioId) {
+                    allAudio[i].pause();
+                }
+            }
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        }
+        
+    </script>
+</head>
+
+<body>
+    
+    <div class="sidebar">
+        <div class="logo">
+            <a href="">
+                <img src="Spotifylogo.png" alt="Logo">
+            </a>
+        </div>
+
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="signup.html">
+                        <span class="fa fa-home"></span>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="signup.html">
+                        <span class="fa fa-search"></span>
+                        <span>Search</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="signup.html">
+                        <span class="fa fas fa-book"></span>
+                        <span>Your Library</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="signup.html">
+                        <span class="fa fa-home"></span>
+                        <span>Create Playlist</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="signup.html">
+                        <span class="fa fa-search"></span>
+                        <span>Liked Songs</span>    
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+        <div class="policies">
+            <ul>
+                <li>
+                    <a href="https://policies.google.com/privacy">Cookies</a>
+                </li>
+                <li>
+                    <a href="https://policies.google.com/privacy">Privacy</a>
+                </li>
+            </ul>
+        </div>
+
+
+    </div>
+
+    <div class="main-container">
+        <div class="topbar">
+            <div class="prev-next-buttons">
+                <button type="button" class="fa fas fa-chevron-left"></button>
+                <button type="button" class="fa fas fa-chevron-right"></button>
+            </div>
+
+            <div class="navbar">
+                <ul>
+                    <li>
+                        <a href="signup.html">Sign Up</a>
+                    </li>
+                </ul>
+                <button type="button" onclick="openLogin()">Login</button>
+            </div>
+        </div>
+<div class="spotify-playlists">
+    <h2>Punjabi Songs</h2>
+
+    <div class="list">
+        <div class="item">
+            <img src="diljitd.jpeg" />
+            <div class="play" onclick="playAudio('myAudio1')">
+                <span class="fa fa-play"></span>
+            </div>
+            <audio id="myAudio1">
+                <source src="lalkara.mp3" type="audio/mp3">
+            </audio>
+            <h4>Lalkara</h4>
+            <p>Diljit Dosanjh</p>
+        </div>
+
+        <div class="item">
+            <img src="sidhu.jpeg" />
+            <div class="play" onclick="playAudio('myAudio2')">
+                <span class="fa fa-play"></span>
+            </div>
+            <audio id="myAudio2">
+                <source src="Drippy - (Raag.Fm).mp3" type="audio/mp3">
+            </audio>
+            <h4>Drippy</h4>
+            <p>Sidhu Moose Wala, AR Paisley, MXRCI,  </p>
+        </div>
+        <div class="item">
+            <img src="nimrat.jpeg" />
+            <div class="play" onclick="playAudio('myAudio3')">
+                <span class="fa fa-play"></span>
+            </div>
+            <audio id="myAudio3">
+                <source src="Shikayatan-2.mp3" type="audio/mp3">
+            </audio>
+            <h4>Shikayatan</h4>
+            <p>Nimrat Khaira</p>
+        </div>
+        <div class="item">
+            <img src="navaan.jpeg" />
+            <div class="play" onclick="playAudio('myAudio4')">
+                <span class="fa fa-play"></span>
+            </div>
+            <audio id="myAudio4">
+                <source src="paper.mp3" type="audio/mp3">
+            </audio>
+            <h4>Paper before money</h4>
+            <p>Navaan Sandhu</p>
+        </div>
+        <div class="item">
+            <img src="arjan.jpeg" />
+            <div class="play" onclick="playAudio('myAudio5')">
+                <span class="fa fa-play"></span>
+            </div>
+            <audio id="myAudio5">
+                <source src="Chidi Udd Kaan Udd - (Raag.Fm).mp3" type="audio/mp3">
+            </audio>
+            <h4>Chidi Udd Kaan Udd</h4>
+            <p>Arjan Dhillon</p>
+        </div>
+        <div class="item">
+            <img src="gurjasmeen.jpeg" />
+            <div class="play" onclick="playAudio('myAudio6')">
+                <span class="fa fa-play"></span>
+            </div>
+            <audio id="myAudio6">
+                <source src="Mutiyaar - (Raag.Fm).mp3" type="audio/mp3">
+            </audio>
+            <h4>Mutiyaar</h4>
+            <p>Gur Sidhu and Jasmeen Akhtar</p>
+        </div>
+    </div>
+</div>
+
+<div class="spotify-playlists">
+    <h2>Hindi Songs</h2>
+
+    <div class="list">
+        <div class="item">
+            <img src="jaq.jpeg" />
+            <div class="play" onclick="playAudio('myAudio7')">
+                <span class="fa fa-play"></span>
+            </div>
+            <audio id="myAudio7">
+                <source src="Yimmy Yimmy - (Raag.Fm).mp3" type="audio/mp3">
+            </audio>
+            <h4>Yimmy Yimmy</h4>
+            <p>Rajat Nagpal, Shreya Ghoshal, and Tayc</p>
+        </div>
+
+        <div class="item">
+            <img src="ve.jpeg" />
+            <div class="play" onclick="playAudio('myAudio8')">
+                <span class="fa fa-play"></span>
+            </div>
+            <audio id="myAudio8">
+                <source src="Ve Kamleya_320(PagalWorld.com.sb).mp3" type="audio/mp3">
+            </audio>
+            <h4>Ve Kamleya</h4>
+            <p>Arijit Singh, Shreya Ghoshal, Shadab Faridi, Altamash Faridi</p>
+        </div>
+        <div class="item">
+            <img src="tum.jpeg" />
+            <div class="play" onclick="playAudio('myAudio9')">
+                <span class="fa fa-play"></span>
+            </div>
+            <audio id="myAudio9">
+                <source src="Tum Se Jalebi 320 Kbps.mp3" type="audio/mp3">
+            </audio>
+            <h4>Tum Se</h4>
+            <p>Sachin-Jigar, Raghav Chaitanya, Varun Jain, Indraneel</p>
+        </div>
+        <div class="item">
+            <img src="king.jpeg" />
+            <div class="play" onclick="playAudio('myAudio10')">
+                <span class="fa fa-play"></span>
+            </div>
+            <audio id="myAudio10">
+                <source src="Maan Meri Jaan Champagne Talk 320 Kbps.mp3" type="audio/mp3">
+            </audio>
+            <h4>Maan Meri Jaan</h4>
+            <p>King</p>
+        </div>
+        <div class="item">
+            <img src="laal.jpeg" />
+            <div class="play" onclick="playAudio('myAudio11')">
+                <span class="fa fa-play"></span>
+            </div>
+            <audio id="myAudio11">
+                <source src="Laal Peeli Akhiyaan Teri Baaton Mein Aisa Uljha Jiya 320 Kbps.mp3" type="audio/mp3">
+            </audio>
+            <h4>Laal Peeli Akhiyaan</h4>
+            <p>Romy and Tanishk Bagchi</p>
+        </div>
+        <div class="item">
+            <img src="what.jpeg" />
+            <div class="play" onclick="playAudio('myAudio12')">
+                <span class="fa fa-play"></span>
+            </div>
+            <audio id="myAudio12">
+                <source src="What Jhumka_320(PagalWorld.com.cm).mp3" type="audio/mp3">
+            </audio>
+            <h4>What Jhumka</h4>
+            <p>Arijit Singh and Jonita Gandhi</p>
+        </div>
+    </div>
+</div>
+
+<div class="spotify-playlists">
+    <h2>English Songs</h2>
+
+    <div class="list">
+        <div class="item">
+            <img src="taylor.jpeg" />
+            <div class="play" onclick="playAudio('myAudio13')">
+                <span class="fa fa-play"></span>
+            </div>
+            <audio id="myAudio13">
+                <source src="Taylor Swift - Lover (Official Music Video) (256  kbps).mp3" type="audio/mp3">
+            </audio>
+            <h4>Lover</h4>
+            <p>Taylor Swift</p>
+        </div>
+
+        <div class="item">
+            <img src="lipa.jpeg" />
+            <div class="play" onclick="playAudio('myAudio14')">
+                <span class="fa fa-play"></span>
+            </div>
+            <audio id="myAudio14">
+                <source src="LANDR-Dua Lipa - Houdini Remix-Balanced-Medium.mp3" type="audio/mp3">
+            </audio>
+            <h4>Houdini</h4>
+            <p>Dua Lipa</p>
+        </div>
+        <div class="item">
+            <img src="ch.jpeg" />
+            <div class="play" onclick="playAudio('myAudio15')">
+                <span class="fa fa-play"></span>
+            </div>
+            <audio id="myAudio15">
+                <source src="Chauffeur - (Raag.Fm).mp3" type="audio/mp3">
+            </audio>
+            <h4>Chauffeur</h4>
+            <p>Diljit Dosanjh, Tory lanez & Ikky</p>
+        </div>
+        <div class="item">
+            <img src="us.jpeg" />
+            <div class="play" onclick="playAudio('myAudio16')">
+                <span class="fa fa-play"></span>
+            </div>
+            <audio id="myAudio16">
+                <source src="US.mp3" type="audio/mp3">
+            </audio>
+            <h4>US</h4>
+            <p>Sidhu Moosewala ft. Raja Kumari</p>
+        </div>
+        <div class="item">
+            <img src="pal.jpeg" />
+            <div class="play" onclick="playAudio('myAudio17')">
+                <span class="fa fa-play"></span>
+            </div>
+            <audio id="myAudio17">
+                <source src="Palpita - (Raag.Fm).mp3" type="audio/mp3">
+            </audio>
+            <h4>Palpita</h4>
+            <p>Camilo x Diljit Dosanjh </p>
+        </div>
+        <div class="item">
+            <img src="mi.jpeg" />
+            <div class="play" onclick="playAudio('myAudio18')">
+                <span class="fa fa-play"></span>
+            </div>
+            <audio id="myAudio18">
+                <source src="Mi Amor 2.0 - SHARN  BOHEMIA(mp3fix.in).mp3" type="audio/mp3">
+            </audio>
+            <h4>Mi Amor</h4>
+            <p>Sharn</p>
+        </div>
+    </div>
+</div>
+
+<script src="https://kit.fontawesome.com/ef9a692198.js" crossorigin="anonymous"></script>
+    <script>
+        function openLogin() {
+            window.location.href = "https://accounts.spotify.com/en/login?continue=https%3A%2F%2Fopen.spotify.com%2F";
+        }
+    </script>
+</body>
+
+</html>
